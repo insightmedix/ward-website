@@ -1,247 +1,490 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Surgical Suite Recovery</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Surgical Suite Recovery | Cape Coast Teaching Hospital</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#002147;--navy2:#003366;--red:#c62828;--red2:#e53935;
+  --light:#f4f7fb;--white:#fff;--text:#1a2535;--muted:#556070;
+  --sans:'DM Sans',system-ui,sans-serif;--serif:'Playfair Display',Georgia,serif;
+}
+body{font-family:var(--sans);background:var(--light);color:var(--text);font-size:15px;line-height:1.65}
 
-    <!-- FONT -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+.topbar{background:var(--red);color:#fff;text-align:center;padding:7px 16px;font-size:11.5px;font-weight:500;letter-spacing:.08em}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: "Inter", sans-serif;
-            background: #f5f9fc;
-            color: #102a43;
-        }
+nav{background:var(--navy);display:flex;justify-content:space-between;align-items:center;padding:0 32px;height:58px;position:sticky;top:0;z-index:200}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none}
+.brand-cross{width:30px;height:30px;background:var(--red2);border-radius:6px;display:flex;align-items:center;justify-content:center}
+.brand-cross svg{width:16px;height:16px}
+.brand-name{font-family:var(--serif);font-size:15px;font-weight:600;letter-spacing:.01em;color:#fff}
+.nav-links{display:flex}
+.nav-links a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;font-weight:400;padding:0 14px;height:58px;display:flex;align-items:center;border-bottom:2.5px solid transparent;transition:.2s;letter-spacing:.02em}
+.nav-links a:hover{color:#fff;border-bottom-color:var(--red2);background:rgba(255,255,255,.06)}
 
-        /* NAV */
-        .nav {
-            position: sticky;
-            top: 0;
-            background: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            z-index: 1000;
-        }
+.hero{position:relative;height:520px;overflow:hidden;background:var(--navy)}
+.slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity 1.2s ease}
+.slide.active{opacity:1}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,21,47,.88) 0%,rgba(0,21,47,.58) 55%,rgba(0,21,47,.18) 100%)}
+.hero-content{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;padding:0 60px;max-width:580px}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.hero-eyebrow-line{width:28px;height:2px;background:var(--red2);border-radius:2px;flex-shrink:0}
+.hero-eyebrow span{font-size:11px;font-weight:600;letter-spacing:.14em;color:rgba(255,255,255,.75);text-transform:uppercase}
+.hero h1{font-family:var(--serif);font-size:50px;font-weight:700;color:#fff;line-height:1.12;letter-spacing:-.01em;margin-bottom:6px}
+.hero h1 em{font-style:italic;color:#93c5fd;font-weight:400}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);font-weight:300;margin-bottom:32px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-r{background:var(--red2);color:#fff;border:none;padding:13px 28px;border-radius:4px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);letter-spacing:.02em;transition:background .2s}
+.btn-r:hover{background:var(--red)}
+.btn-g{background:rgba(255,255,255,.15);color:#fff;border:1.5px solid rgba(255,255,255,.5);padding:13px 28px;border-radius:4px;font-size:13.5px;font-weight:500;cursor:pointer;font-family:var(--sans);letter-spacing:.02em;transition:.2s}
+.btn-g:hover{background:rgba(255,255,255,.25);border-color:#fff}
 
-        .nav h2 {
-            margin: 0;
-            color: #0077b6;
-            font-size: 18px;
-        }
+.hero-dots{position:absolute;bottom:80px;right:40px;display:flex;gap:8px}
+.dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:.25s;border:none;padding:0}
+.dot.active{background:#fff;transform:scale(1.35)}
 
-        .nav-links a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: #334e68;
-            font-weight: 500;
-            transition: 0.3s;
-        }
+.hero-stat-bar{position:absolute;bottom:0;left:0;right:0;background:rgba(0,12,30,.8);backdrop-filter:blur(6px);display:flex;border-top:1px solid rgba(255,255,255,.1)}
+.hstat{flex:1;text-align:center;padding:14px 12px;border-right:1px solid rgba(255,255,255,.08)}
+.hstat:last-child{border-right:none}
+.hstat-val{font-family:var(--serif);font-size:24px;font-weight:600;color:#fff;letter-spacing:-.02em}
+.hstat-val sup{font-size:13px;color:var(--red2);font-weight:700;font-family:var(--sans)}
+.hstat-lbl{font-size:10px;font-weight:500;letter-spacing:.1em;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:3px}
 
-        .nav-links a:hover {
-            color: #0077b6;
-        }
+.ql-bar{background:#fff;border-bottom:1px solid #e2e8f0;display:flex;justify-content:center;flex-wrap:wrap}
+.ql{display:flex;align-items:center;gap:9px;padding:15px 24px;font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:3px solid transparent;transition:.2s;cursor:pointer;letter-spacing:.01em}
+.ql:hover{color:var(--navy);border-bottom-color:var(--red2);background:#fafbfd}
+.ql-ico{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:14px}
+.qi1{background:#dbeafe}.qi2{background:#fee2e2}.qi3{background:#d1fae5}.qi4{background:#ede9fe}
 
-        /* HERO */
-        .hero {
-            position: relative;
-            height: 420px;
-            overflow: hidden;
-        }
+.wrap{max-width:1100px;margin:0 auto;padding:64px 24px}
+.sec-label{font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--red2);margin-bottom:8px}
+.sec-title{font-family:var(--serif);font-size:34px;font-weight:700;color:var(--navy);letter-spacing:-.01em;line-height:1.18}
+.sec-title em{font-weight:400;font-style:italic;color:var(--red2)}
+.sec-hdr{margin-bottom:36px}
 
-        .hero img {
-            width: 100%;
-            height: 420px;
-            object-fit: cover;
-            position: absolute;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
+.two-col{display:grid;grid-template-columns:3fr 2fr;gap:26px}
+.about-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid #e2e8f0}
+.about-img-wrap{height:210px;overflow:hidden;position:relative}
+.about-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.about-card:hover .about-img-wrap img{transform:scale(1.04)}
+.about-body{padding:30px}
+.about-body h3{font-family:var(--serif);font-size:22px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.about-body p{font-size:14px;color:var(--muted);line-height:1.75}
+.about-side{display:flex;flex-direction:column;gap:14px}
+.ipill{background:#fff;border-radius:10px;border:1px solid #e2e8f0;padding:18px 20px;display:flex;align-items:flex-start;gap:14px;transition:.25s;cursor:default}
+.ipill:hover{border-color:#c7d2e0;transform:translateY(-2px)}
+.ipill-ico{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.ii-b{background:#dbeafe}.ii-r{background:#fee2e2}.ii-g{background:#d1fae5}.ii-p{background:#ede9fe}
+.ipill h4{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:4px}
+.ipill p{font-size:12.5px;color:var(--muted);line-height:1.55}
 
-        .hero-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: white;
-            background: rgba(0,0,0,0.35);
-            padding: 20px 30px;
-            border-radius: 10px;
-        }
+.divider{height:1px;background:#e2e8f0;margin:56px 0}
 
-        .hero-text h1 {
-            margin: 0;
-            font-size: 32px;
-        }
+.gallery-strip{overflow:hidden;position:relative;border-radius:12px;height:260px;cursor:pointer}
+.gallery-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.gslide{min-width:calc(33.333% - 8px);margin-right:12px;border-radius:10px;overflow:hidden;position:relative;flex-shrink:0}
+.gslide img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.gslide:hover img{transform:scale(1.06)}
+.gslide-cap{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:14px 14px 12px;color:#fff;font-size:12px;font-weight:500;letter-spacing:.02em}
+.gallery-nav{display:flex;justify-content:center;gap:10px;margin-top:16px}
+.gnav-btn{width:34px;height:34px;border-radius:50%;border:1.5px solid #cbd5e1;background:#fff;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;transition:.2s;color:var(--muted)}
+.gnav-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy)}
 
-        /* CONTAINER */
-        .container {
-            max-width: 1100px;
-            margin: auto;
-            padding: 50px 20px;
-        }
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.svc{background:#fff;border-radius:10px;border:1px solid #e2e8f0;overflow:hidden;transition:.25s;cursor:default}
+.svc:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.svc-top{height:5px}
+.st-r{background:var(--red2)}.st-b{background:var(--navy)}.st-t{background:#0d9488}
+.svc-body{padding:24px}
+.svc-ico{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:15px}
+.si-r{background:#fee2e2}.si-b{background:#dbeafe}.si-t{background:#ccfbf1}
+.svc h4{font-family:var(--serif);font-size:17px;font-weight:700;color:var(--navy);margin-bottom:7px}
+.svc p{font-size:13px;color:var(--muted);line-height:1.65}
+.svc a{font-size:13px;color:var(--red2);font-weight:600;text-decoration:none;display:inline-block;margin-top:12px;letter-spacing:.01em}
+.svc a:hover{text-decoration:underline}
 
-        h2 {
-            color: #0077b6;
-            margin-top: 40px;
-        }
+.staff-sec{background:var(--navy);border-radius:12px;padding:48px}
+.staff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:30px}
+.stcard{background:rgba(255,255,255,.07);border-radius:10px;padding:24px;border:1px solid rgba(255,255,255,.1);transition:.2s}
+.stcard:hover{background:rgba(255,255,255,.12)}
+.stavatar{width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:17px;font-weight:700;color:#fff;margin-bottom:14px;border:2px solid rgba(255,255,255,.22)}
+.stcard h4{font-family:var(--serif);font-size:16px;font-weight:600;color:#fff;margin-bottom:4px}
+.stcard p{font-size:12px;color:rgba(255,255,255,.52);line-height:1.5}
+.stbadge{display:inline-block;background:rgba(197,40,40,.3);color:#fca5a5;font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;margin-top:10px;border:1px solid rgba(197,40,40,.4);letter-spacing:.04em}
 
-        .card {
-            background: white;
-            padding: 20px;
-            margin-top: 15px;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
-            transition: 0.3s;
-        }
+.acc-wrap{margin-top:8px}
+.acc-item{background:#fff;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:10px;overflow:hidden}
+.acc-hdr{padding:18px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;user-select:none;transition:background .15s;gap:12px}
+.acc-hdr:hover{background:#fafbfd}
+.acc-left{display:flex;align-items:center;gap:14px}
+.acc-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px}
+.acc-hdr h4{font-family:var(--serif);font-size:16px;font-weight:700;color:var(--navy)}
+.acc-hdr p{font-size:12px;color:#94a3b8;margin-top:2px}
+.acc-chev{width:22px;height:22px;border-radius:50%;border:1.5px solid #cbd5e1;display:flex;align-items:center;justify-content:center;transition:.25s;color:#94a3b8;font-size:11px;flex-shrink:0}
+.acc-item.open .acc-chev{transform:rotate(180deg);background:var(--navy);border-color:var(--navy);color:#fff}
+.acc-body{display:none;border-top:1px solid #e2e8f0;padding:20px 22px}
+.acc-item.open .acc-body{display:block}
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.dlitem{display:flex;align-items:center;gap:12px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:7px;padding:13px 15px;transition:.2s;cursor:pointer}
+.dlitem:hover{background:#f1f5f9;border-color:#94a3b8}
+.dlico{width:36px;height:36px;background:#dbeafe;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#1d4ed8;font-size:16px;flex-shrink:0}
+.dlitem h5{font-size:13px;font-weight:600;color:#1e293b}
+.dlitem p{font-size:11px;color:#94a3b8;margin-top:2px}
+.dldl{margin-left:auto;color:var(--red2);font-size:14px;font-weight:700;flex-shrink:0}
 
-        /* ACCORDION */
-        .accordion {
-            background-color: #0077b6;
-            color: white;
-            cursor: pointer;
-            padding: 15px;
-            width: 100%;
-            border: none;
-            text-align: left;
-            font-size: 16px;
-            margin-top: 10px;
-            border-radius: 8px;
-            transition: 0.3s;
-        }
+.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.edu-item{display:flex;gap:11px;align-items:flex-start;background:#f8fafc;border-radius:7px;padding:14px;border:1px solid #e2e8f0}
+.edu-dot{width:7px;height:7px;border-radius:50%;background:var(--red2);margin-top:6px;flex-shrink:0}
+.edu-item p{font-size:13px;color:#334e68;line-height:1.55}
 
-        .accordion:hover {
-            background-color: #0096c7;
-        }
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.gal-thumb{border-radius:8px;overflow:hidden;height:120px;cursor:pointer}
+.gal-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s;display:block}
+.gal-thumb:hover img{transform:scale(1.08)}
 
-        .panel {
-            display: none;
-            padding: 10px 0;
-        }
+footer{background:#001530;color:rgba(255,255,255,.55);padding:44px 60px 22px}
+.foot-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:44px;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.09)}
+.foot-brand h3{font-family:var(--serif);color:#fff;font-size:18px;font-weight:700;margin-bottom:8px;letter-spacing:-.01em}
+.foot-brand p{font-size:13px;line-height:1.7;color:rgba(255,255,255,.5)}
+.foot-col h4{font-size:11px;font-weight:600;letter-spacing:.1em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:14px}
+.foot-col a{display:block;font-size:13px;color:rgba(255,255,255,.48);text-decoration:none;margin-bottom:9px;transition:.15s}
+.foot-col a:hover{color:#fff}
+.foot-bottom{max-width:1100px;margin:0 auto;padding-top:20px;display:flex;justify-content:space-between;font-size:12px}
+.foot-badge{background:var(--red2);color:#fff;font-size:9px;font-weight:700;padding:2px 7px;border-radius:3px;letter-spacing:.06em;margin-left:8px;vertical-align:middle}
 
-        /* FOOTER */
-        footer {
-            background: #003049;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            margin-top: 60px;
-        }
-    </style>
+@media(max-width:900px){
+  .two-col{grid-template-columns:1fr}
+  .three-col{grid-template-columns:1fr 1fr}
+  .staff-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:640px){
+  .three-col{grid-template-columns:1fr}
+  .staff-grid{grid-template-columns:1fr}
+  .hero h1{font-size:34px}
+  .hero-content{padding:0 28px;max-width:100%}
+  .hero-stat-bar{display:none}
+  .nav-links{display:none}
+  nav{padding:0 16px}
+  .wrap{padding:40px 16px}
+  .dl-grid{grid-template-columns:1fr}
+  .edu-grid{grid-template-columns:1fr}
+  .gal-grid{grid-template-columns:1fr 1fr}
+  .foot-inner{grid-template-columns:1fr;gap:28px}
+  footer{padding:32px 20px 18px}
+  .foot-bottom{flex-direction:column;gap:8px;text-align:center}
+  .gslide{min-width:calc(80% - 8px)}
+}
+</style>
 </head>
-
 <body>
 
-<!-- NAV -->
-<div class="nav">
-    <h2>Surgical Suite Recovery</h2>
-    <div class="nav-links">
-        <a href="#">Home</a>
-        <a href="#">Services</a>
-        <a href="#">Education</a>
-        <a href="#">Contact</a>
+<div class="topbar">CAPE COAST TEACHING HOSPITAL &nbsp;·&nbsp; SURGICAL SUITE RECOVERY UNIT</div>
+
+<nav>
+  <a class="brand" href="#">
+    <div class="brand-cross">
+      <svg viewBox="0 0 16 16" fill="none"><path d="M8 2v12M2 8h12" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/></svg>
     </div>
+    <span class="brand-name">Surgical Suite Recovery</span>
+  </a>
+  <div class="nav-links">
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Our Team</a>
+    <a href="#">Education</a>
+    <a href="#">Resources</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<div class="hero" id="hero">
+  <img class="slide active" src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1400&auto=format&fit=crop&q=80" alt="Hospital ward">
+  <img class="slide" src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=1400&auto=format&fit=crop&q=80" alt="Medical team">
+  <img class="slide" src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=1400&auto=format&fit=crop&q=80" alt="Patient care">
+  <img class="slide" src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1400&auto=format&fit=crop&q=80" alt="Surgery preparation">
+  <img class="slide" src="https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=1400&auto=format&fit=crop&q=80" alt="Recovery room">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Cape Coast Teaching Hospital</span>
+    </div>
+    <h1>Surgical Suite<br><em>Recovery Unit</em></h1>
+    <p class="hero-sub">Expert post-operative care — every step of your recovery.</p>
+    <div class="hero-btns">
+      <button class="btn-r">Our Services</button>
+      <button class="btn-g">Contact the Unit</button>
+    </div>
+  </div>
+  <div class="hero-dots" id="heroDots"></div>
+  <div class="hero-stat-bar">
+    <div class="hstat"><div class="hstat-val">24<sup>/7</sup></div><div class="hstat-lbl">Nursing Care</div></div>
+    <div class="hstat"><div class="hstat-val">100<sup>%</sup></div><div class="hstat-lbl">Monitored Recovery</div></div>
+    <div class="hstat"><div class="hstat-val">Expert</div><div class="hstat-lbl">Surgical Team</div></div>
+    <div class="hstat"><div class="hstat-val">Safe<sup>+</sup></div><div class="hstat-lbl">Infection Control</div></div>
+  </div>
 </div>
 
-<!-- HERO -->
-<div class="hero">
-    <img class="slide" src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b">
-    <img class="slide" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
-    <img class="slide" src="https://images.unsplash.com/photo-1580281657527-47b2a4f3cddc">
-
-    <div class="hero-text">
-        <h1>Surgical Suite Recovery</h1>
-        <p>Cape Coast Teaching Hospital</p>
-    </div>
+<div class="ql-bar">
+  <a class="ql"><div class="ql-ico qi1">📋</div>Patient Info</a>
+  <a class="ql"><div class="ql-ico qi2">💊</div>Medications</a>
+  <a class="ql"><div class="ql-ico qi3">🏥</div>Recovery Guide</a>
+  <a class="ql"><div class="ql-ico qi4">📞</div>Contact Us</a>
 </div>
 
-<!-- CONTENT -->
-<div class="container">
+<div class="wrap">
 
-    <h2>About the Unit</h2>
-    <div class="card">
-        Surgical Suite Recovery Unit – Cape Coast Teaching Hospital<br><br>
-        <b>Tagline:</b> Caring for You Every Step After Surgery
+  <div class="two-col" style="margin-bottom:52px">
+    <div class="about-card">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&auto=format&fit=crop&q=80" alt="Recovery care">
+      </div>
+      <div class="about-body">
+        <h3>About the Recovery Unit</h3>
+        <p>The Surgical Suite Recovery Unit at Cape Coast Teaching Hospital provides high-quality post-operative care following a wide range of surgical procedures. Our dedicated nursing team ensures every patient is closely monitored, comfortable, and well-informed throughout the recovery process.</p>
+        <p style="margin-top:11px">We are committed to clinical excellence, compassionate care, and empowering patients and families with the knowledge they need for a safe and smooth recovery.</p>
+      </div>
     </div>
-
-    <!-- PRESENTATIONS -->
-    <button class="accordion">📂 Presentations (Download Section)</button>
-    <div class="panel">
-        <div class="card">Post-Operative Care Overview – <a href="#">Download</a></div>
-        <div class="card">Infection Prevention – <a href="#">Download</a></div>
-        <div class="card">Recovery Guidelines – <a href="#">Download</a></div>
+    <div class="about-side">
+      <div class="ipill"><div class="ipill-ico ii-b">🩺</div><div><h4>Continuous Monitoring</h4><p>Vital signs, pain levels, and wound status assessed around the clock by trained nurses.</p></div></div>
+      <div class="ipill"><div class="ipill-ico ii-r">🛡️</div><div><h4>Infection Prevention</h4><p>Strict protocols prevent surgical site infections and hospital-acquired complications.</p></div></div>
+      <div class="ipill"><div class="ipill-ico ii-g">🏃</div><div><h4>Mobility & Rehabilitation</h4><p>Early guided mobilisation supports faster, safer recovery outcomes for every patient.</p></div></div>
+      <div class="ipill"><div class="ipill-ico ii-p">📖</div><div><h4>Patient Education</h4><p>Tailored education on wound care, medications, and warning signs at discharge.</p></div></div>
     </div>
+  </div>
 
-    <!-- STAFF -->
-    <button class="accordion">👩‍⚕️ Nursing Staff</button>
-    <div class="panel">
-        <div class="card">Head Nurse – Surgical Suite Recovery</div>
-        <div class="card">Registered Nurses</div>
-        <div class="card">Student Nurses</div>
+  <div class="sec-hdr">
+    <div class="sec-label">Gallery</div>
+    <div class="sec-title">A Look Inside <em>Our Unit</em></div>
+  </div>
+
+  <div class="gallery-strip" id="galleryStrip">
+    <div class="gallery-track" id="galleryTrack">
+      <div class="gslide"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&auto=format&fit=crop&q=75" alt="Hospital"><div class="gslide-cap">Recovery ward</div></div>
+      <div class="gslide"><img src="https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=600&auto=format&fit=crop&q=75" alt="Recovery"><div class="gslide-cap">Patient monitoring</div></div>
+      <div class="gslide"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&auto=format&fit=crop&q=75" alt="Nurse"><div class="gslide-cap">Nursing team</div></div>
+      <div class="gslide"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=600&auto=format&fit=crop&q=75" alt="Surgical"><div class="gslide-cap">Surgical suite</div></div>
+      <div class="gslide"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&auto=format&fit=crop&q=75" alt="Equipment"><div class="gslide-cap">Medical equipment</div></div>
+      <div class="gslide"><img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=600&auto=format&fit=crop&q=75" alt="Care"><div class="gslide-cap">Compassionate care</div></div>
     </div>
+  </div>
+  <div class="gallery-nav">
+    <button class="gnav-btn" id="galPrev">&#8592;</button>
+    <button class="gnav-btn" id="galNext">&#8594;</button>
+  </div>
 
-    <!-- EDUCATION -->
-    <button class="accordion">📚 Health Education</button>
-    <div class="panel">
-        <div class="card">
-            Patients are taught wound care, medication adherence, mobility after surgery, and early warning signs of complications.
+  <div class="divider"></div>
+
+  <div class="sec-hdr">
+    <div class="sec-label">What We Offer</div>
+    <div class="sec-title">Core <em>Services</em></div>
+  </div>
+
+  <div class="three-col" style="margin-bottom:52px">
+    <div class="svc">
+      <div class="svc-top st-r"></div>
+      <div class="svc-body">
+        <div class="svc-ico si-r">🩹</div>
+        <h4>Post-Operative Care</h4>
+        <p>Comprehensive monitoring and management immediately following surgery, ensuring a stable, safe transition from theatre.</p>
+        <a href="#">Learn more →</a>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-top st-b"></div>
+      <div class="svc-body">
+        <div class="svc-ico si-b">💉</div>
+        <h4>Pain Management</h4>
+        <p>Evidence-based pain assessment and treatment to keep patients comfortable during the critical early recovery window.</p>
+        <a href="#">Learn more →</a>
+      </div>
+    </div>
+    <div class="svc">
+      <div class="svc-top st-t"></div>
+      <div class="svc-body">
+        <div class="svc-ico si-t">🧼</div>
+        <h4>Wound Care</h4>
+        <p>Proper dressing changes, infection prevention, and patient education on home wound management and healing signs.</p>
+        <a href="#">Learn more →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="staff-sec">
+    <div class="sec-label" style="color:#93c5fd">Our People</div>
+    <div class="sec-title" style="color:#fff">Meet the <em style="color:#93c5fd">Nursing Team</em></div>
+    <div class="staff-grid">
+      <div class="stcard">
+        <div class="stavatar">HN</div>
+        <h4>Head Nurse</h4>
+        <p>Surgical Suite Recovery Unit — leading clinical oversight and team coordination</p>
+        <div class="stbadge">Unit Lead</div>
+      </div>
+      <div class="stcard">
+        <div class="stavatar">RN</div>
+        <h4>Registered Nurses</h4>
+        <p>Post-operative patient monitoring, medication administration, and care delivery</p>
+        <div class="stbadge">Clinical Team</div>
+      </div>
+      <div class="stcard">
+        <div class="stavatar">SN</div>
+        <h4>Student Nurses</h4>
+        <p>Supervised clinical practice under the guidance of experienced registered staff</p>
+        <div class="stbadge">In Training</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="sec-hdr">
+    <div class="sec-label">Resources & Information</div>
+    <div class="sec-title">Unit <em>Resources</em></div>
+  </div>
+
+  <div class="acc-wrap">
+    <div class="acc-item" id="a1">
+      <div class="acc-hdr" onclick="tog('a1')">
+        <div class="acc-left">
+          <div class="acc-icon" style="background:#dbeafe">📂</div>
+          <div><h4>Presentations & Downloads</h4><p>Clinical resources and educational materials</p></div>
         </div>
+        <div class="acc-chev">▾</div>
+      </div>
+      <div class="acc-body">
+        <div class="dl-grid">
+          <div class="dlitem"><div class="dlico">📄</div><div><h5>Post-Operative Care Overview</h5><p>Full clinical guide · PDF</p></div><div class="dldl">↓</div></div>
+          <div class="dlitem"><div class="dlico">🛡️</div><div><h5>Infection Prevention Protocol</h5><p>Updated 2026 · PDF</p></div><div class="dldl">↓</div></div>
+          <div class="dlitem"><div class="dlico">📋</div><div><h5>Recovery Guidelines</h5><p>Patient handout · PDF</p></div><div class="dldl">↓</div></div>
+          <div class="dlitem"><div class="dlico">💊</div><div><h5>Medication Adherence Guide</h5><p>For patients & families · PDF</p></div><div class="dldl">↓</div></div>
+        </div>
+      </div>
     </div>
 
-    <!-- GALLERY -->
-    <button class="accordion">🖼️ Gallery</button>
-    <div class="panel">
-        <div class="card">
-            Nurse and clinical images will be added here later.
+    <div class="acc-item" id="a2">
+      <div class="acc-hdr" onclick="tog('a2')">
+        <div class="acc-left">
+          <div class="acc-icon" style="background:#d1fae5">📚</div>
+          <div><h4>Health Education Topics</h4><p>What every patient should know</p></div>
         </div>
+        <div class="acc-chev">▾</div>
+      </div>
+      <div class="acc-body">
+        <div class="edu-grid">
+          <div class="edu-item"><div class="edu-dot"></div><p>Wound care at home — keeping your incision clean and protected</p></div>
+          <div class="edu-item"><div class="edu-dot"></div><p>Medication adherence — taking the right doses at the right times</p></div>
+          <div class="edu-item"><div class="edu-dot"></div><p>Mobility after surgery — safe movement and when to rest</p></div>
+          <div class="edu-item"><div class="edu-dot"></div><p>Early warning signs — when to seek urgent medical attention</p></div>
+          <div class="edu-item"><div class="edu-dot"></div><p>Nutrition and hydration for optimal healing</p></div>
+          <div class="edu-item"><div class="edu-dot"></div><p>Follow-up appointments and what to expect</p></div>
+        </div>
+      </div>
     </div>
+
+    <div class="acc-item" id="a3">
+      <div class="acc-hdr" onclick="tog('a3')">
+        <div class="acc-left">
+          <div class="acc-icon" style="background:#ede9fe">🖼️</div>
+          <div><h4>Gallery</h4><p>Unit photos and clinical imagery</p></div>
+        </div>
+        <div class="acc-chev">▾</div>
+      </div>
+      <div class="acc-body">
+        <div class="gal-grid">
+          <div class="gal-thumb"><img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=400&auto=format&fit=crop&q=70" alt="Ward"></div>
+          <div class="gal-thumb"><img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&auto=format&fit=crop&q=70" alt="Nurse"></div>
+          <div class="gal-thumb"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&auto=format&fit=crop&q=70" alt="Equipment"></div>
+          <div class="gal-thumb"><img src="https://images.unsplash.com/photo-1612277795421-9bc7706a4a34?w=400&auto=format&fit=crop&q=70" alt="Recovery"></div>
+          <div class="gal-thumb"><img src="https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=400&auto=format&fit=crop&q=70" alt="Care"></div>
+          <div class="gal-thumb"><img src="https://images.unsplash.com/photo-1584820927498-cfe5211fd8bf?w=400&auto=format&fit=crop&q=70" alt="Surgery"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
-<!-- FOOTER -->
 <footer>
-    © 2026 Surgical Suite Recovery | Cape Coast Teaching Hospital
+  <div class="foot-inner">
+    <div class="foot-brand">
+      <h3>Surgical Suite Recovery <span class="foot-badge">CCTH</span></h3>
+      <p>Cape Coast Teaching Hospital · Providing compassionate, expert post-operative care to patients and families across Cape Coast and beyond.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Quick Links</h4>
+      <a href="#">About the Unit</a>
+      <a href="#">Our Services</a>
+      <a href="#">Nursing Team</a>
+      <a href="#">Health Education</a>
+      <a href="#">Downloads</a>
+    </div>
+    <div class="foot-col">
+      <h4>Contact</h4>
+      <a href="#">Location & Hours</a>
+      <a href="#">Phone Directory</a>
+      <a href="#">Referring Physicians</a>
+      <a href="#">Patient Feedback</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span>© 2026 Surgical Suite Recovery Unit · Cape Coast Teaching Hospital</span>
+    <span>Privacy Policy · Accessibility</span>
+  </div>
 </footer>
 
-<!-- SLIDESHOW -->
 <script>
-let index = 0;
-const slides = document.getElementsByClassName("slide");
+const slides = document.querySelectorAll('.slide');
+const dotsEl = document.getElementById('heroDots');
+let cur = 0, total = slides.length, timer;
 
-function showSlides() {
-    for (let i = 0; i < slides.length; i++) {
-        slides[i].style.opacity = 0;
-    }
+slides.forEach((_, i) => {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.setAttribute('aria-label', 'Slide ' + (i + 1));
+  d.onclick = () => goTo(i);
+  dotsEl.appendChild(d);
+});
 
-    index++;
-    if (index > slides.length) index = 1;
-
-    slides[index - 1].style.opacity = 1;
-
-    setTimeout(showSlides, 3500);
+function goTo(n) {
+  slides[cur].classList.remove('active');
+  dotsEl.children[cur].classList.remove('active');
+  cur = (n + total) % total;
+  slides[cur].classList.add('active');
+  dotsEl.children[cur].classList.add('active');
+  clearTimeout(timer);
+  timer = setTimeout(() => goTo(cur + 1), 4200);
 }
-showSlides();
-</script>
+timer = setTimeout(() => goTo(1), 4200);
 
-<!-- ACCORDION -->
-<script>
-let acc = document.getElementsByClassName("accordion");
+const track = document.getElementById('galleryTrack');
+let gpos = 0;
+const slideW = () => track.children[0].offsetWidth + 12;
+const maxPos = () => -(track.children.length - 3) * slideW();
 
-for (let i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function () {
-        let panel = this.nextElementSibling;
-        panel.style.display = panel.style.display === "block" ? "none" : "block";
-    });
+document.getElementById('galNext').onclick = () => {
+  if (gpos > maxPos()) { gpos -= slideW(); track.style.transform = `translateX(${gpos}px)`; }
+};
+document.getElementById('galPrev').onclick = () => {
+  if (gpos < 0) { gpos += slideW(); track.style.transform = `translateX(${gpos}px)`; }
+};
+
+let ts = 0;
+document.getElementById('galleryStrip').addEventListener('touchstart', e => { ts = e.touches[0].clientX; }, { passive: true });
+document.getElementById('galleryStrip').addEventListener('touchend', e => {
+  const dx = ts - e.changedTouches[0].clientX;
+  if (Math.abs(dx) > 40) { dx > 0 ? document.getElementById('galNext').click() : document.getElementById('galPrev').click(); }
+});
+
+function tog(id) {
+  const el = document.getElementById(id);
+  const open = el.classList.contains('open');
+  document.querySelectorAll('.acc-item.open').forEach(x => x.classList.remove('open'));
+  if (!open) el.classList.add('open');
 }
 </script>
-
 </body>
 </html>
