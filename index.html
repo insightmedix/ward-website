@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Ward Website</title>
+    <title>Surgical Suite Recovery</title>
 
     <style>
         body {
             margin: 0;
-            font-family: Arial;
-            background: #0d0d0d;
+            font-family: Arial, sans-serif;
+            background-color: #0d0d0d;
             color: white;
         }
 
         header {
             background: black;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
 
-        h1 {
+        header h1 {
             margin: 0;
             color: #00c3ff;
+        }
+
+        header p {
+            margin-top: 5px;
+            font-size: 14px;
+            color: #ccc;
         }
 
         h2 {
@@ -28,6 +34,13 @@
 
         .section {
             padding: 30px;
+        }
+
+        .card {
+            background: #1a1a1a;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
         }
 
         /* SLIDESHOW */
@@ -44,12 +57,12 @@
             display: none;
         }
 
-        /* CARD STYLE */
-        .card {
-            background: #1a1a1a;
-            padding: 20px;
-            margin: 15px 0;
-            border-radius: 10px;
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: black;
+            font-size: 12px;
+            color: #aaa;
         }
     </style>
 </head>
@@ -57,41 +70,65 @@
 <body>
 
 <header>
-    <h1>Our Ward</h1>
-    <p>Compassion • Care • Excellence</p>
+    <h1>Surgical Suite Recovery</h1>
+    <p>Compassion • Precision • Patient Safety</p>
 </header>
 
 <!-- SLIDESHOW -->
 <div class="slideshow">
-    <img class="slides" src="https://via.placeholder.com/1200x350?text=Nursing+Care">
-    <img class="slides" src="https://via.placeholder.com/1200x350?text=Healthcare+Team">
-    <img class="slides" src="https://via.placeholder.com/1200x350?text=Patient+Support">
+    <img class="slides" src="https://images.unsplash.com/photo-1580281657527-47b2a4f3cddc">
+    <img class="slides" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118">
+    <img class="slides" src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b">
 </div>
 
 <div class="section">
+
     <h2>About the Ward</h2>
     <div class="card">
-        <p>This ward provides high-quality patient care, focusing on safety, comfort, and recovery.</p>
+        <p>
+        The Surgical Suite Recovery ward provides specialized post-operative care for patients recovering from surgical procedures. 
+        Our team ensures close monitoring, pain management, and safe recovery in a controlled clinical environment.
+        </p>
     </div>
 
-    <h2>Services</h2>
+    <h2>Our Services</h2>
     <div class="card">
-        <p>• Patient monitoring<br>
-           • Medication administration<br>
-           • Health education<br>
-           • Emotional support</p>
+        <p>
+        • Post-operative monitoring<br>
+        • Pain management and medication administration<br>
+        • Wound care and infection prevention<br>
+        • Patient stabilization and observation<br>
+        • Emotional and psychological support
+        </p>
+    </div>
+
+    <h2>Patient Care Approach</h2>
+    <div class="card">
+        <p>
+        We focus on patient-centered care, ensuring dignity, safety, and comfort throughout the recovery process. 
+        Our nurses work closely with surgical teams to provide continuous assessment and timely intervention.
+        </p>
     </div>
 
     <h2>Health Education</h2>
     <div class="card">
-        <p>Maintaining hygiene, following treatment plans, and regular check-ups are essential for recovery.</p>
+        <p>
+        Patients and families are educated on post-surgical care, medication adherence, wound care, mobility, and signs of complications. 
+        Proper education promotes faster recovery and reduces hospital readmission rates.
+        </p>
     </div>
 
     <h2>Contact</h2>
     <div class="card">
-        <p>Email: example@email.com</p>
+        <p>Email: surgicalrecovery@hospital.com</p>
+        <p>Phone: +000 000 0000</p>
     </div>
+
 </div>
+
+<footer>
+    © 2026 Surgical Suite Recovery | Healthcare Excellence
+</footer>
 
 <script>
 let index = 0;
