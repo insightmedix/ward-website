@@ -3,152 +3,243 @@
 <head>
     <title>Surgical Suite Recovery</title>
 
+    <!-- FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: #e6f7fb;
-            color: #033;
+            font-family: "Inter", sans-serif;
+            background: #f5f9fc;
+            color: #102a43;
         }
 
-        header {
-            background: linear-gradient(to right, #007c91, #00b4d8);
-            color: white;
-            padding: 25px;
-            text-align: center;
+        /* NAV */
+        .nav {
+            position: sticky;
+            top: 0;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
         }
 
-        nav {
-            background: #0096c7;
-            padding: 10px;
-            text-align: center;
+        .nav h2 {
+            margin: 0;
+            color: #0077b6;
+            font-size: 18px;
         }
 
-        nav a {
-            color: white;
-            margin: 0 15px;
+        .nav-links a {
+            margin-left: 20px;
             text-decoration: none;
-            font-weight: bold;
+            color: #334e68;
+            font-weight: 500;
+            transition: 0.3s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        .nav-links a:hover {
+            color: #0077b6;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 420px;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            background: rgba(0,0,0,0.35);
+            padding: 20px 30px;
+            border-radius: 10px;
+        }
+
+        .hero-text h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 50px 20px;
         }
 
         h2 {
-            color: #007c91;
-        }
-
-        .section {
-            padding: 30px;
+            color: #0077b6;
+            margin-top: 40px;
         }
 
         .card {
             background: white;
             padding: 20px;
-            margin: 15px 0;
+            margin-top: 15px;
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+            transition: 0.3s;
         }
 
-        /* SLIDESHOW */
-        .slideshow {
-            position: relative;
-            height: 350px;
-            overflow: hidden;
+        .card:hover {
+            transform: translateY(-5px);
         }
 
-        .slides {
-            width: 100%;
-            height: 350px;
-            object-fit: cover;
-            display: none;
-        }
-
-        footer {
-            text-align: center;
-            padding: 15px;
-            background: #007c91;
+        /* ACCORDION */
+        .accordion {
+            background-color: #0077b6;
             color: white;
+            cursor: pointer;
+            padding: 15px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            font-size: 16px;
+            margin-top: 10px;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .accordion:hover {
+            background-color: #0096c7;
+        }
+
+        .panel {
+            display: none;
+            padding: 10px 0;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #003049;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
         }
     </style>
 </head>
 
 <body>
 
-<header>
-    <h1>Surgical Suite Recovery</h1>
-    <p>Cape Coast Teaching Hospital</p>
-</header>
-
-<nav>
-    <a href="#">Home</a>
-    <a href="#">Services</a>
-    <a href="#">Education</a>
-    <a href="#">Contact</a>
-</nav>
-
-<!-- SLIDESHOW -->
-<div class="slideshow">
-    <img class="slides" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200">
-    <img class="slides" src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=1200">
-    <img class="slides" src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1200">
+<!-- NAV -->
+<div class="nav">
+    <h2>Surgical Suite Recovery</h2>
+    <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">Education</a>
+        <a href="#">Contact</a>
+    </div>
 </div>
 
-<div class="section">
+<!-- HERO -->
+<div class="hero">
+    <img class="slide" src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b">
+    <img class="slide" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b">
+    <img class="slide" src="https://images.unsplash.com/photo-1580281657527-47b2a4f3cddc">
 
-    <h2>About the Ward</h2>
+    <div class="hero-text">
+        <h1>Surgical Suite Recovery</h1>
+        <p>Cape Coast Teaching Hospital</p>
+    </div>
+</div>
+
+<!-- CONTENT -->
+<div class="container">
+
+    <h2>About the Unit</h2>
     <div class="card">
-        <p>
-        The Surgical Suite Recovery ward at Cape Coast Teaching Hospital provides specialized care for patients recovering after surgery.
-        Our team ensures patient safety, comfort, and continuous monitoring during the critical recovery phase.
-        </p>
+        Surgical Suite Recovery Unit – Cape Coast Teaching Hospital<br><br>
+        <b>Tagline:</b> Caring for You Every Step After Surgery
     </div>
 
-    <h2>Our Services</h2>
-    <div class="card">
-        <p>
-        • Post-operative monitoring<br>
-        • Pain management<br>
-        • Wound care<br>
-        • Infection prevention<br>
-        • Emotional support
-        </p>
+    <!-- PRESENTATIONS -->
+    <button class="accordion">📂 Presentations (Download Section)</button>
+    <div class="panel">
+        <div class="card">Post-Operative Care Overview – <a href="#">Download</a></div>
+        <div class="card">Infection Prevention – <a href="#">Download</a></div>
+        <div class="card">Recovery Guidelines – <a href="#">Download</a></div>
     </div>
 
-    <h2>Health Education</h2>
-    <div class="card">
-        <p>
-        Patients are educated on medication adherence, wound care, hygiene, and recognizing early signs of complications.
-        This helps ensure a safe and smooth recovery process.
-        </p>
+    <!-- STAFF -->
+    <button class="accordion">👩‍⚕️ Nursing Staff</button>
+    <div class="panel">
+        <div class="card">Head Nurse – Surgical Suite Recovery</div>
+        <div class="card">Registered Nurses</div>
+        <div class="card">Student Nurses</div>
     </div>
 
-    <h2>Contact</h2>
-    <div class="card">
-        <p>Email: info@ccthospital.com</p>
-        <p>Phone: +233 XXX XXX XXX</p>
+    <!-- EDUCATION -->
+    <button class="accordion">📚 Health Education</button>
+    <div class="panel">
+        <div class="card">
+            Patients are taught wound care, medication adherence, mobility after surgery, and early warning signs of complications.
+        </div>
+    </div>
+
+    <!-- GALLERY -->
+    <button class="accordion">🖼️ Gallery</button>
+    <div class="panel">
+        <div class="card">
+            Nurse and clinical images will be added here later.
+        </div>
     </div>
 
 </div>
 
+<!-- FOOTER -->
 <footer>
     © 2026 Surgical Suite Recovery | Cape Coast Teaching Hospital
 </footer>
 
+<!-- SLIDESHOW -->
 <script>
 let index = 0;
-showSlides();
+const slides = document.getElementsByClassName("slide");
 
 function showSlides() {
-    let slides = document.getElementsByClassName("slides");
     for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        slides[i].style.opacity = 0;
     }
+
     index++;
-    if (index > slides.length) { index = 1; }
-    slides[index - 1].style.display = "block";
-    setTimeout(showSlides, 3000);
+    if (index > slides.length) index = 1;
+
+    slides[index - 1].style.opacity = 1;
+
+    setTimeout(showSlides, 3500);
+}
+showSlides();
+</script>
+
+<!-- ACCORDION -->
+<script>
+let acc = document.getElementsByClassName("accordion");
+
+for (let i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function () {
+        let panel = this.nextElementSibling;
+        panel.style.display = panel.style.display === "block" ? "none" : "block";
+    });
 }
 </script>
 
