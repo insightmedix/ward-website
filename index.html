@@ -6,30 +6,37 @@
     <style>
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #0d0d0d;
-            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            background: #e6f7fb;
+            color: #033;
         }
 
         header {
-            background: black;
+            background: linear-gradient(to right, #007c91, #00b4d8);
+            color: white;
             padding: 25px;
             text-align: center;
         }
 
-        header h1 {
-            margin: 0;
-            color: #00c3ff;
+        nav {
+            background: #0096c7;
+            padding: 10px;
+            text-align: center;
         }
 
-        header p {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #ccc;
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
         }
 
         h2 {
-            color: #00c3ff;
+            color: #007c91;
         }
 
         .section {
@@ -37,10 +44,11 @@
         }
 
         .card {
-            background: #1a1a1a;
+            background: white;
             padding: 20px;
             margin: 15px 0;
-            border-radius: 10px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         /* SLIDESHOW */
@@ -60,9 +68,8 @@
         footer {
             text-align: center;
             padding: 15px;
-            background: black;
-            font-size: 12px;
-            color: #aaa;
+            background: #007c91;
+            color: white;
         }
     </style>
 </head>
@@ -71,14 +78,21 @@
 
 <header>
     <h1>Surgical Suite Recovery</h1>
-    <p>Compassion • Precision • Patient Safety</p>
+    <p>Cape Coast Teaching Hospital</p>
 </header>
+
+<nav>
+    <a href="#">Home</a>
+    <a href="#">Services</a>
+    <a href="#">Education</a>
+    <a href="#">Contact</a>
+</nav>
 
 <!-- SLIDESHOW -->
 <div class="slideshow">
-    <img class="slides" src="https://images.unsplash.com/photo-1580281657527-47b2a4f3cddc">
-    <img class="slides" src="https://images.unsplash.com/photo-1579684385127-1ef15d508118">
-    <img class="slides" src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b">
+    <img class="slides" src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200">
+    <img class="slides" src="https://images.unsplash.com/photo-1581594693702-fbdc51b2763b?q=80&w=1200">
+    <img class="slides" src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=1200">
 </div>
 
 <div class="section">
@@ -86,8 +100,8 @@
     <h2>About the Ward</h2>
     <div class="card">
         <p>
-        The Surgical Suite Recovery ward provides specialized post-operative care for patients recovering from surgical procedures. 
-        Our team ensures close monitoring, pain management, and safe recovery in a controlled clinical environment.
+        The Surgical Suite Recovery ward at Cape Coast Teaching Hospital provides specialized care for patients recovering after surgery.
+        Our team ensures patient safety, comfort, and continuous monitoring during the critical recovery phase.
         </p>
     </div>
 
@@ -95,39 +109,31 @@
     <div class="card">
         <p>
         • Post-operative monitoring<br>
-        • Pain management and medication administration<br>
-        • Wound care and infection prevention<br>
-        • Patient stabilization and observation<br>
-        • Emotional and psychological support
-        </p>
-    </div>
-
-    <h2>Patient Care Approach</h2>
-    <div class="card">
-        <p>
-        We focus on patient-centered care, ensuring dignity, safety, and comfort throughout the recovery process. 
-        Our nurses work closely with surgical teams to provide continuous assessment and timely intervention.
+        • Pain management<br>
+        • Wound care<br>
+        • Infection prevention<br>
+        • Emotional support
         </p>
     </div>
 
     <h2>Health Education</h2>
     <div class="card">
         <p>
-        Patients and families are educated on post-surgical care, medication adherence, wound care, mobility, and signs of complications. 
-        Proper education promotes faster recovery and reduces hospital readmission rates.
+        Patients are educated on medication adherence, wound care, hygiene, and recognizing early signs of complications.
+        This helps ensure a safe and smooth recovery process.
         </p>
     </div>
 
     <h2>Contact</h2>
     <div class="card">
-        <p>Email: surgicalrecovery@hospital.com</p>
-        <p>Phone: +000 000 0000</p>
+        <p>Email: info@ccthospital.com</p>
+        <p>Phone: +233 XXX XXX XXX</p>
     </div>
 
 </div>
 
 <footer>
-    © 2026 Surgical Suite Recovery | Healthcare Excellence
+    © 2026 Surgical Suite Recovery | Cape Coast Teaching Hospital
 </footer>
 
 <script>
